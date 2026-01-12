@@ -9,6 +9,7 @@
 
 ## commande utile :
 
+```bash
 ### Cloner le repo en local
 - git clone htpps://github.com/tresorud/Gestion-des-emprunts-PHP-homework-.git
 - cd Gestion-des-emprunts-PHP-homework-
@@ -20,3 +21,4 @@
 - git commit -m "votre message"
 ### Pousser votre code sur le depot github
 - git push -u origin nom-de-la-branche
+```
