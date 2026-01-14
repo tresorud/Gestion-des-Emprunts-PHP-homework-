@@ -599,7 +599,7 @@ progress {
 }
 
 .img-fluid {
-  max-width: 400px !important;
+  width: 400px !important;
   height: 400px !important;
   border-radius: 50% !important;
 }
@@ -10843,6 +10843,9 @@ html {
   padding-bottom: 1rem;
   background-color: rgb(2, 31, 95, 0.54) !important;
 }
+.navbar-custom:hover{
+  backdrop-filter: blur(2px);
+}
 .navbar-custom .navbar-brand {
   text-transform: uppercase;
   font-size: 1rem;
@@ -10851,6 +10854,7 @@ html {
 }
 .navbar-custom .navbar-nav .nav-item .nav-link {
   text-transform: uppercase;
+  display: inline;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
@@ -10926,8 +10930,8 @@ header.masthead .bg-circle-4 {
 }
 @media (max-width: 640px) {
   .img-fluid{
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 300px;
+    max-height: 300px;
   }
 }
 
@@ -10951,7 +10955,7 @@ header.masthead .bg-circle-4 {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 5px;
+  left: 0;
   margin-top: 5px;
   width: 0;
   height: 2px;
@@ -10959,5 +10963,5 @@ header.masthead .bg-circle-4 {
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .navbar-custom .navbar-nav .nav-item .nav-link:hover::before{
-  width: 85%;
+  width: 100%;
 }
