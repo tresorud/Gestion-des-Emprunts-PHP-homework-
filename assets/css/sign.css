@@ -28,6 +28,14 @@
     border-radius: 8px;
     padding: 40px 20px;
 }
+form .newcol{
+    border-color: #999 !important;
+    outline: 0;
+    transition: all 0.3s ease;
+}
+form .col .newcol:focus-visible, form .col .newcol:hover{
+    border-color: #0d6efd !important;
+}
 @media (max-width:640px) {
     .box-min{
         max-height: 55vh;
