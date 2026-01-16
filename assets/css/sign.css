@@ -36,8 +36,22 @@ form .newcol{
 form .col .newcol:focus-visible, form .col .newcol:hover{
     border-color: #0d6efd !important;
 }
+.texterr{
+    color: rgb(255, 255, 255) !important;
+    text-decoration: 0;
+}
 @media (max-width:640px) {
     .box-min{
         max-height: 55vh;
+    }
+}
+@media (max-height:640px ) and (max-width:640px){
+    .box-min{
+        max-height: 80vh;
+    }
+}
+@media (max-width:450px){
+    .box-min{
+        max-height: 45vh;
     }
 }

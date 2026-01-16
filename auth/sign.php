@@ -24,14 +24,14 @@
                     </div>
                     <div class="col-12 text-xl-center text-md-start text-primary mb-md-4 mb-2 fs-4 fw-semi-bold">Connnexion</div>
                 </div>
-                <form action="./chech_session.php" method="post" class="d-flex flex-column g-2 w-100 h-100">
+                <form action="./connexion.php" method="post" class="d-flex flex-column g-2 w-100 h-100">
                     <div class="col">
                         <label class="d-block w-100 fs-6" for="name">Nom</label>
-                        <input type="text" class="w-100 border border-primary rounded-2 p-2 newcol" name="name" id="name">
+                        <input type="text" class="w-100 border border-primary rounded-2 p-2 newcol" required name="name" id="name">
                     </div>
                     <div class="col">
                         <label class="d-block w-100 fs-6" for="pass">Mot de passe</label>
-                        <input type="password" class="w-100 border border-primary rounded-2 p-2 newcol" name="pass" id="pass">
+                        <input type="password" class="w-100 border border-primary rounded-2 p-2 newcol" name="pass" id="pass" required>
                     </div>
                     <div class="col">
                         <label class="d-block w-100 fs-6" for="role">Rôle</label>
@@ -41,12 +41,11 @@
                         </select>
                     </div>
                     <div class="submit col d-flex align-items-center">
-                        <input type="submit" class="btn btn-primary  w-100 fs-5 rounded-3 p-2" onclick="verify()" value="Connexion">
+                        <input type="submit" class="btn btn-primary  w-100 fs-5 rounded-3 p-2" value="Connexion">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../js/verification.js"></script>
 </body>
 </html>
