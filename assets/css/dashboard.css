@@ -1,0 +1,95 @@
+body {
+    background-color: #f5f7fb;
+    font-family: "Segoe UI", sans-serif;
+}
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    background: #0d6efd;
+    color: white;
+    padding-top: 20px;
+}
+
+.sidebar .logo {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 15px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+/* Content */
+
+.content {
+    margin-left: 240px;
+    padding: 25px;
+}
+/* Topbar */
+
+.topbar {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+/* Profile */
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+/* Cards */
+
+.stat-card {
+    border: none;
+    border-radius: 18px;
+    padding: 25px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: white;
+}
+/* Responsive */
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    .content {
+        margin-left: 0;
+    }
+}

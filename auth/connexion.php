@@ -13,23 +13,37 @@
 <!-- traitement des données du formulaire -->
     <?php
     require_once "./login.php"; //connexion à la base de donnée
-    var_dump($_POST);
+    session_start();
+
     if (isset($_POST["name"] ) && isset($_POST["pass"])) {
         
         $name = trim($_POST["name"]);
         $password = trim($_POST["pass"]);
         $role = trim($_POST["role"]);
 
+        // stockage des variable de nom et de role dans les varaiables de session
+
+        $_SESSION["name"] = $name;
+        $_SESSION["role"] = $role;
+
         //recherche de l'utilisateur dans la base de donnée
         if ($role == "user") {
-            $request = $pdo->prepare("SELECT (nom,prenom) FROM etudiants WHERE (nom = :name) && (motdepasse = :password)");
-            $request->execute(
+           try {
+             $request = $pdo->prepare("SELECT * FROM etudiant WHERE Nom = :name AND motdepasse = :password");
+             $request->execute(
                 [
-                    ':name'=> $name,
+                    'name'=> $name,
                     ':password'=> $password
                 ]
             );
-            if ( !$request || $request->rowCount() == 0) {
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+           } catch (Exception $e) {
+            echo 'Erreur'. $e->getMessage() .'';
+            die();
+           }
+            if ( $result) {
+                header('Location: check_session.php');
+            }else {
                 echo '
                     <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
                         <div class="col-8 col-md-6 d-flex gap-4 alert alert-danger justify-content-center align-content-center p-2 flex-column">
@@ -44,22 +58,28 @@
                         </div>
                     </div>
                 ';
-            }else {
-                header('Location : check_session.php');
             }
         }
 
         // gestion de la connexion des admins
 
         if ($role == "admin") {
-            $request = $pdo->prepare("SELECT (nom,prenom) FROM administrateurs WHERE (nom = :name) && (motdepasse = :password)");
+            $request = $pdo->prepare("SELECT Nom FROM administrateur WHERE Nom = :name AND motdepasse = :password");
             $request->execute(
                 [
-                    ':name'=> $name,
+                    'name'=> $name,
                     ':password'=> $password
                 ]
             );
-            if ( !$request || $request->rowCount() == 0) {
+            try{
+                 $result = $request->fetch(PDO::FETCH_ASSOC);
+            } catch (Exception $e) {
+                echo 'Erreur'. $e->getMessage() .'';
+                die();
+           }
+            if ($result) {
+                header('Location: check_session.php');
+            }else {
                 echo '
                     <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
                         <div class="col-8 col-md-6 d-flex gap-4 alert alert-danger justify-content-center align-content-center p-2 flex-column">
@@ -74,8 +94,6 @@
                         </div>
                     </div>
                 ';
-            }else {
-                header('Location : check_session.php');
             }
         }
     }
