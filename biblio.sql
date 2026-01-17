@@ -30,7 +30,8 @@ CREATE TABLE Livre (
 CREATE TABLE Emprunter (
     CodeEtudiant INT,
     CodeLivre INT,
-    DateEmprunt DATE,
+    DateEmprunt DATE DEFAULT CURRENT_TIMESTAMP,
+    date_fin DATETIME NOT NULL,
     PRIMARY KEY (CodeEtudiant, CodeLivre),
     FOREIGN KEY (CodeEtudiant) REFERENCES Etudiant(CodeEtudiant),
     FOREIGN KEY (CodeLivre) REFERENCES Livre(CodeLivre)
