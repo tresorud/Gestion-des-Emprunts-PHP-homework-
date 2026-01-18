@@ -26,9 +26,9 @@
     <!-- Header-->
     <header class="masthead text-center text-white">
         <div class="masthead-content">
-            <div class="container px-5">
-                <h1 class="masthead-heading mb-0">Une Bibliothèque pour vous</h1>
-                <h2 class="masthead-subheading mb-0">Evadez-vous du monde avec des livres faits pour vous</h2>
+            <div class="container p-3 p-md-5">
+                <h1 class="masthead-heading mt-3 mt-sm-2 pb-4">Une Bibliothèque pour vous</h1>
+                <h2 class="masthead-subheading mb-0 py-3">Evadez-vous du monde avec des livres faits pour vous</h2>
                 <a class="btn btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
             </div>
         </div>
