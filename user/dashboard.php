@@ -8,7 +8,10 @@ if (!isset($_SESSION['name'])) {
     exit;
 }
 
-$id_etudiant = $_SESSION['name'];
+// recuperation des emprunts
+    $req_emp = $pdo->prepare("SELECT * FROM emprunter");
+    $req_emp->execute();
+    $emprunts = $req_emp->fetchAll();
 
 /* Recherche */
 $search = $_GET['search'] ?? '';
@@ -17,6 +20,7 @@ $sql = "SELECT * FROM livre WHERE titre LIKE ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['%' . $search . '%']);
 $livres = $stmt->fetchAll();
+$path = 'dashboard.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -98,6 +102,11 @@ $livres = $stmt->fetchAll();
                 margin-left: 0;
             }
         }
+        .cursor-none{
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            opacity: 0.85 !important;
+        }
     </style>
 </head>
 
@@ -109,16 +118,12 @@ $livres = $stmt->fetchAll();
         <i class="bi bi-book-fill"></i> Biblio Tech
     </div>
 
-    <a href="dashboard.php" class="active">
+    <a href="dashboard.php" class="<?php $active = ($path == 'dashboard.php' ? 'active': '') ?><?php echo $active?>">
         <i class="bi bi-book"></i> Livres
     </a>
 
-    <a href="mes_emprunts.php">
+    <a href="../etutdiants/emprunts.php" class="<?php $active = ($path == 'mes_emprunts.php' ? 'active': '') ?><?php echo $active?>">
         <i class="bi bi-arrow-left-right"></i> Mes emprunts
-    </a>
-
-    <a href="livres_remis.php">
-        <i class="bi bi-check-circle"></i> Livres remis
     </a>
 </div>
 
@@ -128,7 +133,7 @@ $livres = $stmt->fetchAll();
     <!-- TOPBAR -->
     <div class="topbar d-flex justify-content-between align-items-center">
         <div>
-            <strong><?= htmlspecialchars($_SESSION['nom']) ?></strong><br>
+            <strong><?= htmlspecialchars($_SESSION['name']) ?></strong><br>
             <small class="text-muted">Étudiant</small>
         </div>
 
@@ -162,17 +167,37 @@ $livres = $stmt->fetchAll();
             <div class="col-12 col-md-4">
                 <div class="stat-card h-100 d-flex flex-column justify-content-between">
                     <div>
-                        <h5 class="fw-bold"><?= htmlspecialchars($livre['titre']) ?></h5>
+                        <h5 class="fw-bold"><?= htmlspecialchars($livre['Titre']) ?></h5>
                         <p class="text-muted mb-3">
-                            Auteur : <?= htmlspecialchars($livre['auteur'] ?? 'Inconnu') ?>
+                            Auteur : <?= htmlspecialchars($livre['Auteur'] ?? 'Inconnu') ?>
                         </p>
                     </div>
+                    <form method="POST" action="../emprunts/add.php">
+                        <input type="hidden" name="id_livre" value="<?= $livre['CodeLivre'] ?>">
 
-                    <form method="POST" action="emprunts/add.php">
-                        <input type="hidden" name="id_livre" value="<?= $livre['id_livre'] ?>">
-                        <button class="btn btn-primary w-100">
-                            <i class="bi bi-plus-circle"></i> Emprunter (3 jours)
-                        </button>
+                        <?php if(in_array($livre['CodeLivre'],array_column($emprunts,"CodeLivre"))) :?>
+
+                            <?php foreach ($emprunts as $emprunt) : ?>
+                                <?php if( ($livre["CodeLivre"] === $emprunt['CodeLivre'] and $emprunt['status'] !== 'en_cours')) : ?>
+                                    <button class="btn btn-primary w-100">
+                                        <i class="bi bi-plus-circle"></i> Emprunter (3 jours)
+                                    </button>
+                                    <?php break;?>
+                                <?php elseif ($livre["CodeLivre"] === $emprunt['CodeLivre'] and $emprunt['status'] === 'en_cours') :?>
+                                    <button class="btn btn-danger w-100 text-decoration-line-through cursor-none">
+                                        <i class="bi bi-plus-circle"></i> Emprunter
+                                    </button>
+                                    <?php break;?>
+                                <?php endif;?>
+                            <?php endforeach;?>
+
+                        <?php else:?>
+
+                            <button class="btn btn-primary w-100">
+                                <i class="bi bi-plus-circle"></i> Emprunter (3 jours)
+                            </button>
+
+                        <?php endif?>
                     </form>
                 </div>
             </div>

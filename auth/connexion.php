@@ -37,6 +37,7 @@
                 ]
             );
             $result = $request->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['id'] = $result['CodeEtudiant'];
            } catch (Exception $e) {
             echo 'Erreur'. $e->getMessage() .'';
             die();

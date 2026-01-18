@@ -1,7 +1,6 @@
 <?php 
     session_start();
     // recupération du nombre d'éleve
-    $title = "Dashboard | Biblio Tech";
     require_once "../auth/login.php";
     $req_user = $pdo->prepare("SELECT * FROM etudiant");
     $req_user->execute();
@@ -22,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?></title>
+    <title>Dashboard | Biblio Tech</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -245,7 +244,7 @@
         <div class="topbar text-end">
 
             <!-- PROFIL -->
-            <div class="profile-box justify-content-end">
+            <div class="profile-box justify-content-start">
                 <i class="bi bi-person-circle fs-3 text-primary"></i>
                 <div class="text-start">
                     <strong><?php echo $_SESSION["name"] ?></strong><br>

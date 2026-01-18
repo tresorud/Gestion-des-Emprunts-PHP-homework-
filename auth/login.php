@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGN IN</title>
+    <title>Dashboard</title>
     <link rel="shortcut icon" href="../assets/4165.jpg" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/sign.css">
     <link rel="stylesheet" href="../bootstrap-5.0.2/dist/css/bootstrap.min.css">

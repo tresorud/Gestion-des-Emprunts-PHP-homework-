@@ -32,6 +32,7 @@ CREATE TABLE Emprunter (
     CodeLivre INT,
     DateEmprunt DATE DEFAULT CURRENT_TIMESTAMP,
     date_fin DATETIME NOT NULL,
+    status ENUM('en_cours','remis') NOT NULL DEFAULT 'en_cours',
     PRIMARY KEY (CodeEtudiant, CodeLivre),
     FOREIGN KEY (CodeEtudiant) REFERENCES Etudiant(CodeEtudiant),
     FOREIGN KEY (CodeLivre) REFERENCES Livre(CodeLivre)
