@@ -15,6 +15,12 @@
     $req_emp = $pdo->prepare("SELECT * FROM emprunter");
     $req_emp->execute();
     $nb_emp = $req_emp->rowCount();
+    $nb_actif = 0;
+    foreach ($req_emp as $student) {
+        if ($student["status"] == 'en_cours') {
+            $nb_actif ++;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -166,13 +172,7 @@
 
             <ul class="collapse nav flex-column ms-3" id="menuEtudiants">
                 <li class="nav-item">
-                    <a class="nav-link" href="../etudiants/add.php">Ajouter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../etudiants/modify.php">Modifier</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../etudiants/delete.php">Supprimer</a>
+                    <a class="nav-link" href="../etutdiants/list.php">Afficher les etudiants</a>
                 </li>
             </ul>
         </li>
@@ -196,13 +196,7 @@
 
         <ul class="collapse nav flex-column ms-3" id="menuLivres">
             <li class="nav-item">
-                <a class="nav-link" href="../livres/add.php">Ajouter un livre</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../livres/modify.php">Modifier un livre</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../livres/delete.php">Supprimer un livre</a>
+                <a class="nav-link" href="../livres/list.php">voir les livres</a>
             </li>
         </ul>
     </li>
@@ -222,12 +216,6 @@
   </a>
 
   <ul class="collapse nav flex-column ms-3" id="menuEmprunts">
-    <li class="nav-item">
-      <a class="nav-link" href="../emprunts/add.php">Nouvel emprunt</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="../emprunts/return.php">Retour livre</a>
-    </li>
     <li class="nav-item">
       <a class="nav-link" href="../emprunts/list.php">Historique</a>
     </li>
@@ -302,6 +290,21 @@
                         <div class="ms-3">
                             <small class="text-muted">Total Emprunts</small>
                             <h3 class="fw-bold mb-0"><?php echo $nb_emp?></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- emprunts en cours  -->
+            <div class="col-12 col-md-4">
+                <div class="stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-circle bg-success">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <div class="ms-3">
+                            <small class="text-muted">emprunts encours</small>
+                            <h3 class="fw-bold mb-0"><?php echo $nb_actif?></h3>
                         </div>
                     </div>
                 </div>

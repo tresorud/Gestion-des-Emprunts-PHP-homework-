@@ -3,10 +3,10 @@ session_start();
 
     require_once '../auth/login.php';
     
-    // recuperation des emprunts
-    $req_emp = $pdo->prepare("SELECT * FROM emprunter");
-    $req_emp->execute();
-    $emprunts = $req_emp->fetchAll();
+    // recuperation des etudiants
+    $req_livre = $pdo->prepare("SELECT * FROM livre");
+    $req_livre->execute();
+    $livres = $req_livre->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -100,20 +100,20 @@ session_start();
 
 <body>
 <!-- CONTENT -->
-<?php if(isset($_SESSION['delete'])):?>
+<?php if(isset($_SESSION['delete_liv'])):?>
     <div class='alert alert-success' role='alert'>
-            l'emprunt a été supprimé avec success !!
+            le livre a été supprimé avec success !!
     </div>
 <?php endif?>
 <div class="content">
 
     <!-- TOPBAR -->
     <div class="topbar d-flex justify-content-center flex-column">
-    <h4 class="mb-4 fw-bold text-center py-3">📚📕 Listes Des Livres Empruntés</h4>
+    <h4 class="mb-4 fw-bold text-center py-3">📚📕 Listes Des Livres</h4>
     <div class="container mt-3 p-0">
         <div class="row mb-3">
             <div class="col-2">
-                <a href="../admin/dashboard.php" class="btn btn-success btn-sm">retour</a>
+                <a href="../admin/dashboard.php" class="btn btn-success btn-sm px-2">Ajouter un livre</a>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
@@ -121,34 +121,24 @@ session_start();
                 <table class="table table-responsive table-hover table-striped">
                     <thead class="bg-primary text-light">
                         <th>numero</th>
-                        <th>Nom et Prenom</th>
-                        <th>Nom du ivre</th>
-                        <th>Date d'emprunt</th>
-                        <th>Date de retour</th>
-                        <th>status</th>
-                        <th>Action</th>
+                        <th>Nom du livre</th>
+                        <th>Auteur</th>
+                        <th>Date edition</th>
+                        <th>Supprimer livre</th>
+                        <th>Modifier</th>
                     </thead>
                     <tbody>
-                        <?php foreach ($emprunts as $key => $emprunt) {  ?>
-                            <?php 
-                                $titre = $pdo->prepare("SELECT livre.Titre ,etudiant.Nom, etudiant.Prenom FROM emprunter 
-                                INNER JOIN livre ON emprunter.CodeLivre = livre.CodeLivre 
-                                INNER JOIN etudiant ON emprunter.CodeEtudiant = etudiant.CodeEtudiant 
-                                WHERE emprunter.CodeLivre =:id");
-                                $titre->execute(array('id'=> $emprunt['CodeLivre']));
-                                $titre = $titre->fetch(PDO::FETCH_ASSOC);
-                            ?>
+                        <?php foreach ($livres as $key => $livre) {  ?>
                         <tr>
                             <td><?= ++$key ?></td>
-                            <td><?= $titre['Nom'].' '.$titre['Prenom'] ?></td>
-                            <td><?= $titre['Titre'] ?></td>
-                            <td><?= $emprunt['DateEmprunt'] ?></td>
-                            <td><?= $emprunt['date_fin'] ?></td>
-                            <td>
-                                <a href="#" class="btn cursor-none <?= $emprunt['status'] == 'en_cours' ? 'btn-info' : 'btn-success' ?> btn-sm"><?= $emprunt['status'] ?></a>
+                            <td><?= $livre['Titre'] ?></td>
+                            <td><?= $livre['Auteur'] ?></td>
+                            <td><?= $livre['DateEdition'] ?></td>
+                            <td class="text-center">
+                                <a href="delete.php?livre=<?=$livre['CodeLivre']?>" class="btn btn-danger w-75">Delete</a>
                             </td>
-                            <td>
-                                <a href="delete.php?etudiant=<?=$emprunt['CodeEtudiant']?>&livre=<?=$emprunt['CodeLivre']?>" class="btn btn-danger btn-sm">Delete</a>
+                            <td class="text-center">
+                                <a href="modify.php?livre=<?=$livre['CodeLivre']?>" class="btn btn-primary w-100">Modifier</a>
                             </td>
                         </tr>
                         <?php } ?>
