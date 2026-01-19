@@ -99,21 +99,18 @@ session_start();
 </head>
 
 <body>
-<!-- CONTENT -->
-<?php if(isset($_SESSION['delete_liv'])):?>
-    <div class='alert alert-success' role='alert'>
-            le livre a été supprimé avec success !!
-    </div>
-<?php endif?>
 <div class="content">
 
     <!-- TOPBAR -->
     <div class="topbar d-flex justify-content-center flex-column">
     <h4 class="mb-4 fw-bold text-center py-3">📚📕 Listes Des Livres</h4>
     <div class="container mt-3 p-0">
-        <div class="row mb-3">
+        <div class="row mb-3 ">
             <div class="col-2">
-                <a href="../admin/dashboard.php" class="btn btn-success btn-sm px-2">Ajouter un livre</a>
+                <a href="add.php" class="btn btn-success btn-sm px-2">Ajouter un livre</a>
+            </div>
+             <div class="col-2 m-0 p-0">
+                <a href="../admin/dashboard.php" class="btn btn-primary btn-sm px-4">retour</a>
             </div>
         </div>
         <div class="row d-flex justify-content-center">

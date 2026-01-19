@@ -100,11 +100,6 @@ session_start();
 
 <body>
 <!-- CONTENT -->
-<?php if(isset($_SESSION['delete_etudiant'])):?>
-    <div class='alert alert-success' role='alert'>
-            le etudiant a été supprimé avec success !!
-    </div>
-<?php endif?>
 <div class="content">
 
     <!-- TOPBAR -->
@@ -114,6 +109,9 @@ session_start();
         <div class="row mb-3">
             <div class="col-2">
                 <a href="add.php" class="btn btn-success btn-sm px-2">Ajouter un étudiant</a>
+            </div>
+             <div class="col-2 m-0 p-0">
+                <a href="../admin/dashboard.php" class="btn btn-primary btn-sm px-4">retour</a>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
