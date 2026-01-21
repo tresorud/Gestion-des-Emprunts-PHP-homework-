@@ -148,7 +148,7 @@ session_start();
                                 <a href="#" class="btn cursor-none <?= $emprunt['status'] == 'en_cours' ? 'btn-info' : 'btn-success' ?> btn-sm"><?= $emprunt['status'] ?></a>
                             </td>
                             <td>
-                                <a href="delete.php?etudiant=<?=$emprunt['CodeEtudiant']?>&livre=<?=$emprunt['CodeLivre']?>" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="delete.php?etudiant=<?=$emprunt['CodeEtudiant']?>&livre=<?=$emprunt['CodeLivre']?>" class="btn btn-danger btn-sm">Retour</a>
                             </td>
                         </tr>
                         <?php } ?>
