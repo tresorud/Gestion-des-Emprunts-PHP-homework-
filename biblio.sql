@@ -10,7 +10,14 @@ CREATE TABLE Etudiant (
     Nom VARCHAR(50) NOT NULL,
     Prenom VARCHAR(50) NOT NULL,
     Adresse VARCHAR(100),
-    Classe VARCHAR(20)
+    Classe VARCHAR(20),
+    motdepasse VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE administrateur (
+    code_administrateur INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    motdepasse VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Livre (
@@ -23,7 +30,9 @@ CREATE TABLE Livre (
 CREATE TABLE Emprunter (
     CodeEtudiant INT,
     CodeLivre INT,
-    DateEmprunt DATE,
+    DateEmprunt DATE DEFAULT CURRENT_TIMESTAMP,
+    date_fin DATETIME NOT NULL,
+    status ENUM('en_cours','remis') NOT NULL DEFAULT 'en_cours',
     PRIMARY KEY (CodeEtudiant, CodeLivre),
     FOREIGN KEY (CodeEtudiant) REFERENCES Etudiant(CodeEtudiant),
     FOREIGN KEY (CodeLivre) REFERENCES Livre(CodeLivre)
